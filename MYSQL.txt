@@ -1,0 +1,131 @@
+MYSQL
+DATABASES:
+-Relational : table, related keys
+-Non-relational : json, key value pairs, graph data structures
+
+
+DATABASE: folder
+TABLE: files
+
+KEYWORDS:
+CREATE DATABASE [name]; -create database
+USE [name]; -access and use database 
+DROP DATABASE [name]; - delete database
+
+ALTER DATABASE [name] READ ONLY = 1; - database will be read-only (database cannot be dropped)
+
+to drop the database on read-only...
+ALTER DATABASE [name] READ ONLY = 0;
+then u can drop
+
+TABLES:
+CREATE TABLE [name](
+[column1] INT[integer],
+[column2] VARCHAR(50)[string],
+[column3] VARCHAR(50),
+[column4] DECIMAL(5,2[this is precision]),
+[column5] DATE[date]
+); - creates table
+
+SELECT * FROM [table name]; - selects/display table
+RENAME TABLE [original name] TO [new name] - change table name
+DROP TABLE [table name] - delete table
+ALTER TABLE [table name] ADD [column] [data type]; - add a new column
+ALTER TABLE [table name] RENAME COLUMN [original column name] TO [new column name]; - rename column name
+ALTER TABLE [table name] MODIFY COLUMN [column name] [new datatype]; - change datatype of column
+ALTER TABLE [table name] MODIFY [column name] [data type] AFTER [column you want it beside to the right]; - move column to the right of another column
+
+ALTER TABLE [table name] MODIFY [column name] [data type] FIRST; - move chosen column to be the first column
+
+ALTER TABLE [table name] DROP COLUMN [column name]; - drop a column
+
+
+
+INSERT:
+INSERT INTO [table name] VALUES ([column1],[column2],[column3],[column4],...); -inserts a row of data with their corresponding column (note: column data must follow the order of the table columns as well its respective datatype
+
+INSERT INTO [table name] VALUES ([column1],[column2],[column3],[column4],...), (), (), (); - to insert multiple row data at once
+
+INSERT INTO [table name] ([column1], [column2], [column3]) VALUES ([column1 name], [column2 name], [column3 name]) - you can impartially insert row data by only specifying the columns you want to populate
+
+SELECT:
+SELECT * FROM [table name] - will display a table
+
+SELECT [column1], [column2] FROM [table name] - will display only the specified column/s (order does not matter)
+
+SELECT * FROM [table name] WHERE [column1] = 1 - will specifically find a row with the given condition, applicable to all datatypes
+
+SELECT * FROM [table name] WHERE [column name] IS NULL - will specifically find a row that has a null value based on the given column name
+
+SELECT * FROM [table name] WHERE [column name] IS NOT NULL - will specifically find a row that has a null value based on the given column name
+
+SELECT [column] FROM [table name] where [condition] - select a column from a table that will return something from the given condition. The condition may also be somewhere from a column as well. Refer to the previous commands above.
+
+UPDATE & DELETE:
+
+UPDATE [table name] SET [column name] [condition] WHERE [column name] [condition] - updates a specific cell in table.
+
+UPDATE [table name] SET [column name] = NULL WHERE [column name] [condition] - updates a specific cell in table to NULL.
+
+UPDATE [table name] SET [column name1], [column name2], [...] [condition] WHERE [column name] [condition] - updates multiple cells in table.
+
+(DO NOT TRY BUT BEWARE: IF WHERE CLAUSE IS REMOVED, ALL OF THE VALUES IN THAT COLUMN WILL BE THE SAME. WARNING AS THIS MIGHT AFFECT VALUES)
+
+DELETE FROM [table name] WHERE [column name][condition] - delete a specific row in a table. WARNING: ADD A WHERE CLAUSE AS REMOVING SO WILL DELETE THE ENTIRE TABLE.
+
+
+AUTOCOMMIT, COMMIT, ROLLBACK:
+COMMIT - SAVEPOINT
+ROLLBACK - GOES BACK SAVEPOINT
+
+CURRENT_DATE() - returns current date
+CURRENT_TIME() - returns current time
+NOW() - returns date and time
+
+example syntax: INSERT INTO [table name] VALUES(CURRENT_DATE(), CURRENT TIME(), NOW());
+
+
+---CONSTRAINTS---
+
+UNIQUE KEYWORD CONSTRAINT:
+UNIQUE - makes sure that the value is unique
+
+CREATE TABLE [table name]([column name] [datatype] UNIQUE); - adds unique constraint to a column
+
+ALTER TABLE [table name] ADD CONSTRAINT UNIQUE([column name]) - add unique constraints to an existing column name
+
+
+NOT NULL CONSTRAINT:
+
+SIMILAR WITH UNIQUE CONSTRAINT, NOT NULL BASICALLY JUST MAKES SURE THAT THE COLUMN SHOULD HAVE AN ACTUAL VALUE, AND SHOULD NOT BE A NULL VALUE. SYNTAX IS SIMILAR TO HOW UNIQUE CONSTRAINT IS USED.
+
+CHECK CONSTRAINT:
+
+SETS LIMITS TO HOW VALUES SHOULD BE INSERTED.
+
+sample syntax:
+	CREATE TABLE [table name](
+		[column1] INT,
+		[column2] VARCHAR(50),
+		[column3] DECIMAL(5, 2),
+		[column4] DATE,
+		CONSTRAINT chk_column3 CHECK ([column3] >= 10.00)
+	);
+this creates a table with a CHECK constraint named "chk_column3" that checks if column 3 is greater than or equal to 10. an error would occur if the user attempts to input a value less than 10.
+
+DEFAULT CONSTRAINT:
+
+SETS DEFAULT VALUE FOR A COLUMN. THIS CAN AVOID NULL VALUES.
+NOTE: WHEN INSERTING A NEW ROW WITH A DEFAULT CONSTRAINT, TO IMPLICITLY MAKE THIS WORK MAKE SURE TO SPECIFY WHICH COLUMNS WILL BE ONLY INCLUDED UPON INSERTION, THAT WAY THERE WILL BE NO MATCH ERRORS.
+
+---PRIMARY KEYS---
+VALUE UNIQUE + NOT NULL CONSTRAINT
+
+
+
+
+
+
+
+
+
